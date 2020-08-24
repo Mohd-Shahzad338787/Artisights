@@ -771,10 +771,7 @@
                 <label for="inputName">Product Name</label>
                 <input type="text" id="inputName" class="form-control">
               </div>
-              <div class="form-group">
-                <label for="inputProjectLeader">Product Title</label>
-                <input type="text" id="inputProjectLeader" class="form-control">
-              </div>
+              
               <div class="form-group">
                 <label for="inputDescription">Prodect Description</label>
                 <textarea id="inputDescription" class="form-control" rows="3" placeholder="Somrthing type here about Product..."></textarea>
