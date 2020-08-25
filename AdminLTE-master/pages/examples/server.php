@@ -30,11 +30,11 @@ if (isset($_POST['addProduct'])) {
       // Now let's move the uploaded image into the folder: image 
       if (move_uploaded_file($tempname, $folder))  { 
           $msg = "Image uploaded successfully"; 
-          echo "kiya mra hua tra vada";
+          echo "ho Mohd";
       }
       else
       { 
-        echo "kiya hua tra vada";
+        echo "kiya Mhd ";
           $msg = "Failed to upload image"; 
     } 
   }
