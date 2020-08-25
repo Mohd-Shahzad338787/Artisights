@@ -1,9 +1,10 @@
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Legacy User Menu</title>
+  <title>AdminLTE 3 | Editors</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -11,9 +12,15 @@
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.min.css">
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="../../plugins/codemirror/codemirror.css">
+  <link rel="stylesheet" href="../../plugins/codemirror/theme/monokai.css">
+  <!-- SimpleMDE -->
+  <link rel="stylesheet" href="../../plugins/simplemde/simplemde.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -129,43 +136,6 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item dropdown user-menu">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="../../dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image">
-          <span class="d-none d-md-inline">Alexander Pierce</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <!-- User image -->
-          <li class="user-header bg-primary">
-            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-
-            <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2012</small>
-            </p>
-          </li>
-          <!-- Menu Body -->
-          <li class="user-body">
-            <div class="row">
-              <div class="col-4 text-center">
-                <a href="#">Followers</a>
-              </div>
-              <div class="col-4 text-center">
-                <a href="#">Sales</a>
-              </div>
-              <div class="col-4 text-center">
-                <a href="#">Friends</a>
-              </div>
-            </div>
-            <!-- /.row -->
-          </li>
-          <!-- Menu Footer-->
-          <li class="user-footer">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
-            <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
-          </li>
-        </ul>
-      </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -190,6 +160,16 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
+        </div>
+      </div>
+
       <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
@@ -393,8 +373,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Forms
@@ -415,7 +395,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../forms/editors.html" class="nav-link">
+                <a href="../forms/editors.html" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Editors</p>
                 </a>
@@ -563,8 +543,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
@@ -603,7 +583,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../examples/legacy-user-menu.html" class="nav-link active">
+                <a href="../examples/legacy-user-menu.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Legacy User Menu</p>
                 </a>
@@ -745,63 +725,86 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
+  
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Legacy User Menu</h1>
-          </div>
+            <h1 class="m-0 text-dark">Add Product Details</h1>
+          </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Legacy User Menu</li>
+              <li class="breadcrumb-item active">add Product</li>
             </ol>
-          </div>
-        </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
       </div><!-- /.container-fluid -->
-    </section>
+    </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
+    <form name="" action="add_product.php" method="post" enctype="multipart/form-data">
     <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General</h3>
 
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Title</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputName">Product Name</label>
+                <input type="text" id="inputName" name="name" class="form-control">
+              </div>
+        
+              
+              <div class="form-group">
+                <label for="inputClientCompany">Product Price</label>
+                <input type="text" name="price" id="inputClientCompany" class="form-control">
+              </div>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          Start creating your amazing application!
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
-        </div>
-        <!-- /.card-footer-->
-      </div>
-      <!-- /.card -->
+              <div class="form-group">
+                <label for="inputClientCompany">Prodect Description</label>
+                <textarea id="summernote" name="description">
+               
+              </textarea>
+              </div>
 
+              <div class="form-group">
+              <label for="name" class="col-sm-6 control-label">Please Upload 5 Different image</label>
+               <div class="col-sm-6">
+               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag1">
+               <!-- <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag2">
+               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag3">
+               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag4">
+               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag5"> -->
+            </div>
+            </div> 
+            <div class="row">
+              <div class="col-12">
+                   <a href="add_product.php" class="btn btn-secondary" >Cancel </a>
+                   <button type="submit" class="btn btn-primary" name="addProduct">submit</button>
+              </div>
+           </div>
+           </form>
     </section>
-    <!-- /.content -->
-  </div>
   <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
+  <!-- <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.1.0-pre
     </div>
     <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+  </footer> -->
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -817,7 +820,27 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<!-- Summernote -->
+<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<!-- CodeMirror -->
+<script src="../../plugins/codemirror/codemirror.js"></script>
+<script src="../../plugins/codemirror/mode/css/css.js"></script>
+<script src="../../plugins/codemirror/mode/xml/xml.js"></script>
+<script src="../../plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
 </body>
 </html>

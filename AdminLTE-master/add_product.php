@@ -771,18 +771,22 @@
                 <label for="inputName">Product Name</label>
                 <input type="text" id="inputName" class="form-control">
               </div>
-              
-              <div class="form-group">
-                <label for="inputDescription">Prodect Description</label>
-                <textarea id="inputDescription" class="form-control" rows="3" placeholder="Somrthing type here about Product..."></textarea>
-              </div>
+        
               
               <div class="form-group">
                 <label for="inputClientCompany">Product Price</label>
                 <input type="text" id="inputClientCompany" class="form-control">
               </div>
+
               <div class="form-group">
-              <label for="name" class="col-sm-4 control-label">Upload 5 Different image</label>
+                <label for="inputClientCompany">Prodect Description</label>
+                <textarea id="summernote">
+                Place <em>some</em> <u>text</u> <strong>here</strong>
+              </textarea>
+              </div>
+
+              <div class="form-group">
+              <label for="name" class="col-sm-6 control-label">Please Upload 5 Different image</label>
                <div class="col-sm-6">
                <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="file_img">
                <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="file_img">
@@ -791,20 +795,15 @@
                <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="file_img">
             </div>
             </div> 
-    
-    
-      <div class="row">
-        <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancel </a>
-          <input type="submit" value="Submit" class="btn btn-success float-middle">
-        </div>
-      </div>
+            <div class="row">
+              <div class="col-12">
+                   <a href="#" class="btn btn-secondary">Cancel </a>
+                   <input type="submit" value="Submit" class="btn btn-success float-middle">
+              </div>
+           </div>
     </section>
     <!-- /.content -->
   
-
-
-    
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
@@ -856,5 +855,20 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
+
+
 </body>
 </html>

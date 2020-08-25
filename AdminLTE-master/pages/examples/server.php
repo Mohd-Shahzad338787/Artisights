@@ -9,6 +9,39 @@ $errors = array();
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'artisights');
 
+// add product
+if (isset($_POST['addProduct'])) {
+  $name = mysqli_real_escape_string($db, $_POST['name']);
+  $price = mysqli_real_escape_string($db, $_POST['price']);
+  $description = mysqli_real_escape_string($db, $_POST['description']);
+
+
+  $filename = $_FILES["imag1"]['name']; 
+  $tempname = $_FILES["imag1"]['tmp_name'];   
+      $folder = "image/".$filename; 
+
+      
+      // Get all the submitted data from the form 
+      $sql = "INSERT INTO add_product (name,price,description,image1) VALUES ('$name','$price','$description','$filename')"; 
+      echo  "shahzad";
+      // Execute query 
+      mysqli_query($db, $sql); 
+        
+      // Now let's move the uploaded image into the folder: image 
+      if (move_uploaded_file($tempname, $folder))  { 
+          $msg = "Image uploaded successfully"; 
+          echo "kiya mra hua tra vada";
+      }
+      else
+      { 
+        echo "kiya hua tra vada";
+          $msg = "Failed to upload image"; 
+    } 
+  }
+
+
+
+
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
@@ -82,5 +115,5 @@ if (isset($_POST['login_user'])) {
         }
     }
   }
-  
+
   ?>
