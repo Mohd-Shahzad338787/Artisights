@@ -23,22 +23,22 @@ if (isset($_POST['addProduct'])) {
       
       // Get all the submitted data from the form 
       $sql = "INSERT INTO add_product (name,price,description,image1) VALUES ('$name','$price','$description','$filename')"; 
-      echo  "shahzad";
+      
       // Execute query 
       mysqli_query($db, $sql); 
         
       // Now let's move the uploaded image into the folder: image 
       if (move_uploaded_file($tempname, $folder))  { 
           $msg = "Image uploaded successfully"; 
-          echo "ho Mohd";
       }
       else
-      { 
-        echo "kiya Mhd ";
+      {  
           $msg = "Failed to upload image"; 
     } 
+    echo  "Data uploaded successfully";
   }
-
+  
+  
 
 
 

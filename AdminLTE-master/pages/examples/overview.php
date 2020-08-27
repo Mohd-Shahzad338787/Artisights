@@ -1,3 +1,13 @@
+<?php
+// iializing variables
+$username = "";
+$email    = "";
+$errors = array(); 
+// connect to the database
+$db = mysqli_connect('localhost', 'root', '', 'artisights');
+$results = mysqli_query($db, "SELECT * FROM add_product");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -736,12 +746,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Language Menu</h1>
+            <h1>Overview Menu</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Language Menu</li>
+              <li class="breadcrumb-item active">Overview Menu</li>
             </ol>
           </div>
         </div>
@@ -749,34 +759,57 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
-
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Title</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Responsive Table</h3>
+            <div class="card-tools">
+            <a class="btn btn-primary" href="add_product.php" role="button">Add Product</a>
+            <a class="btn btn-success" href="add_product.php" role="button">Update</a>
+            <a class="btn btn-danger" href="add_product.php" role="button">Delete</a>  
+            <a class="btn btn-info" href="add_product.php" role="button">View</a> 
+                 
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Description</th>  
+                  <th>Image</th>
+                  
+                </tr>
+              </thead>
+              <?php while ($row = mysqli_fetch_array($results)) { ?>
+              <tbody>
+                <tr>
+                  <td><?php echo $row['product-id']; ?></td>
+                  <td><?php echo $row['name']; ?></td>
+                  <td><?php echo $row['price']; ?></td>
+                  <td><?php echo $row['description']; ?></td>
+                  <td>
+                  <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image1']); ?>" />
+                 </td>
+                </tr>
+                 
+                </tr>
+                
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
         </div>
-        <div class="card-body">
-          Start creating your amazing application!
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
-        </div>
-        <!-- /.card-footer-->
+        <!-- /.card -->
       </div>
-      <!-- /.card -->
-
-    </section>
+    </div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -806,3 +839,4 @@
 <script src="../../dist/js/demo.js"></script>
 </body>
 </html>
+?>

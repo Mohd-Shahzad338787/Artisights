@@ -596,9 +596,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/language-menu.html" class="nav-link">
+                <a href="pages/examples/overview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Language Menu</p>
+                  <p>Overview</p>
                 </a>
               </li>
               <li class="nav-item">
