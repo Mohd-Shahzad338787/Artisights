@@ -7,6 +7,10 @@ $errors = array();
 $db = mysqli_connect('localhost', 'root', '', 'artisights');
 $results = mysqli_query($db, "SELECT * FROM add_product");
 
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -766,9 +770,9 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
             <h3 class="card-title">Responsive Table</h3>
             <div class="card-tools">
             <a class="btn btn-primary" href="add_product.php" role="button">Add Product</a>
-            <a class="btn btn-success" href="add_product.php" role="button">Update</a>
-            <a class="btn btn-danger" href="add_product.php" role="button">Delete</a>  
-            <a class="btn btn-info" href="add_product.php" role="button">View</a> 
+            <a class="btn btn-success" href="#" role="button">Update</a>
+            <a class="btn btn-danger"  href="#" role="button">Delete</a>  
+            <a class="btn btn-info" href="#" role="button">View</a> 
                  
                 </div>
               </div>
@@ -776,9 +780,9 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
+            <table  class="table table-bordered table-hover" id="tableMain">
               <thead>
-                <tr>
+                <tr class="tableheader">
                   <th>ID</th>
                   <th>Name</th>
                   <th>Price</th>
@@ -789,18 +793,17 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
               </thead>
               <?php while ($row = mysqli_fetch_array($results)) { ?>
               <tbody>
-                <tr>
+                <tr class="datarow">
                   <td><?php echo $row['product-id']; ?></td>
                   <td><?php echo $row['name']; ?></td>
                   <td><?php echo $row['price']; ?></td>
                   <td><?php echo $row['description']; ?></td>
                   <td>
-                  <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image1']); ?>" />
+                 <img src="image/.$row[image1]." width="60" height="40">
+                  
                  </td>
+                </tr> 
                 </tr>
-                 
-                </tr>
-                
                 <?php } ?>
               </tbody>
             </table>
@@ -837,6 +840,34 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+
+
+
+<!-- <button id="thebutton" type="button">Add row</button>		 -->
+		
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>		
+        $(document).ready(function () {	
+            //=================================================================
+            //click on table body
+    //$("#tableMain tbody tr").click(function () {
+    $('#tableMain tbody').on('click', 'tr', function() {
+      //get row contents into an array
+                var tableData = $(this).children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                var td=tableData[0] +  '*' +  tableData[1] + '*' + tableData[2] + '*' +  tableData[3] + '*' + tableData[4];
+                alert(td);
+    });
+    
+    $("#thebutton").click(function () {
+      $('#tableMain > tbody').append('<tr class="datarow"><td>11111</td><td>22222</td><td>33333</td><td>44444</td><td>55555</td></tr>')
+    })
+  });	
+</script>
+
+
 </body>
 </html>
-?>
+
