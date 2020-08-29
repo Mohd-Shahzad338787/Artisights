@@ -770,9 +770,7 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
             <h3 class="card-title">Responsive Table</h3>
             <div class="card-tools">
             <a class="btn btn-primary" href="add_product.php" role="button">Add Product</a>
-            <a class="btn btn-success" href="#" role="button">Update</a>
-            <a class="btn btn-danger"  href="#" role="button">Delete</a>  
-            <a class="btn btn-info" href="#" role="button">View</a> 
+            
                  
                 </div>
               </div>
@@ -788,7 +786,7 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
                   <th>Price</th>
                   <th>Description</th>  
                   <th>Image</th>
-                  
+                  <th>Action</th>
                 </tr>
               </thead>
               <?php while ($row = mysqli_fetch_array($results)) { ?>
@@ -798,12 +796,12 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
                   <td><?php echo $row['name']; ?></td>
                   <td><?php echo $row['price']; ?></td>
                   <td><?php echo $row['description']; ?></td>
-                  <td>
-                 <img src="image/.$row[image1]." width="60" height="40">
-                  
-                 </td>
+                  <td> <img src="image/$row[image1]." width="60" height="40"></td>
+                 <td> <a class="btn btn-success" href="#" role="button">Update</a>
+                        <a class="btn btn-danger"  href="#" role="button">Delete</a>  
+                        <a class="btn btn-info" href="#" role="button">View</a></td>
                 </tr> 
-                </tr>
+               
                 <?php } ?>
               </tbody>
             </table>
