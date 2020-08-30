@@ -14,7 +14,9 @@ if (isset($_POST['addProduct'])) {
   $name = mysqli_real_escape_string($db, $_POST['name']);
   $price = mysqli_real_escape_string($db, $_POST['price']);
   $description = mysqli_real_escape_string($db, $_POST['description']);
-
+  // if (empty($name)) { array_push($errors, "name is required"); }
+  // if (empty($price)) { array_push($errors, "price is required"); }
+  // if (empty($description)) { array_push($errors, "description is required"); }
 
   $filename = $_FILES["imag1"]['name']; 
   $tempname = $_FILES["imag1"]['tmp_name'];   
@@ -114,6 +116,23 @@ if (isset($_POST['login_user'])) {
             array_push($errors, "Wrong username/password combination");
         }
     }
+  }
+
+//Delete Row
+if (isset($_GET['product_id'])) {
+ $product_id = $_GET['product_id'];
+  echo $product_id ;
+$sql =  "DELETE FROM add_product WHERE product_id='$product_id'";
+  // $sql = "DELETE FROM add_product WHERE product_id='$product_id'";
+  $data=mysqli_query($db,$sql);
+  if($data){
+    header('location:overview.php');
+  }
+     else
+     {
+      echo "data not delete successfully";
+    }
+  
   }
 
   ?>

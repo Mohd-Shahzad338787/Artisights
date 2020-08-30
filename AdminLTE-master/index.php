@@ -143,14 +143,14 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="pages/examples/login.php">
           <i class=""><b>Login</b></i>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="pages/examples/register.php">
-          <i class=""><b>Register</B></i>
+          <i class=""><b>Register</B></i> -->
         </a>
       </li>
     </ul>

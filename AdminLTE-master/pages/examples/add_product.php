@@ -733,7 +733,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Add Product Details</h1>
+            <!-- <h1 class="m-0 text-dark">Add Product Details</h1> -->
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -749,11 +749,11 @@
     <!-- Main content -->
     <form name="" action="add_product.php" method="post" enctype="multipart/form-data">
     <section class="content">
-      <div class="row" >
+      <div class="row" style="margin-right: -698.5px; margin-left: 199.5px;">
         <div class="col-md-6">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">General</h3>
+              <h3 class="card-title">Add Product Details</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -781,15 +781,13 @@
               </div>
 
               <div class="form-group">
-              <label for="name" class="col-sm-6 control-label">Please Upload 5 Different image</label>
-               <div class="col-sm-6">
-               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag1">
-               <!-- <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag2">
-               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag3">
-               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag4">
-               <label class="control-label small" for="file_img">format (jpg/png):</label> <input type="file" name="imag5"> -->
-            </div>
-            </div> 
+      <label><strong>Upload Images</strong></label>
+      <div class="custom-file">
+        <input type="file" name="imag1" multiple class="custom-file-input form-control" id="customFile">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+      </div>
+    </div>
+                  
             <div class="row">
               <div class="col-12">
                    <a href="add_product.php" class="btn btn-secondary" >Cancel </a>
@@ -844,3 +842,23 @@
 </script>
 </body>
 </html>
+<script>
+$(document).ready(function() {
+  $('input[type="file"]').on("change", function() {
+    let filenames = [];
+    let files = document.getElementById("customFile").files;
+    if (files.length > 1) {
+      filenames.push("Total Files (" + files.length + ")");
+    } else {
+      for (let i in files) {
+        if (files.hasOwnProperty(i)) {
+          filenames.push(files[i].name);
+        }
+      }
+    }
+    $(this)
+      .next(".custom-file-label")
+      .html(filenames.join(","));
+  });
+});
+</script>
