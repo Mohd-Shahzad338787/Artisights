@@ -1,8 +1,5 @@
-
 <?php 
-
 session_start();
-
 // initializing variables
 $username = "";
 $email    = "";
@@ -13,59 +10,16 @@ $db = mysqli_connect('localhost', 'root', '', 'artisights');
 
 	if (isset($_GET['edit'])) {
 		$id = $_GET['edit'];
-		$update = true;
-		$record = mysqli_query($db, "SELECT * FROM add_product");
 
-		
+		$record = mysqli_query($db, "SELECT * FROM add_product WHERE product_id =$id");
             $n = mysqli_fetch_array($record);
-            
-			$name = $n['name'];
-            $price = $n['price'];
-            $description = $n['description'];
-            $image1 = $n['image1'];
+			$pname = $n['name'];
+            $pprice = $n['price'];
+            $pdescription = $n['description'];
+            $pimage1 = $n['image1'];
 
-            echo $name;
-            echo $price;
-            echo $description;
-            echo $image1;
-
-    
-		}
-    
+		}   
 ?> 
-
-
-
-<?php
-// Check if form is submitted for user update, then redirect to homepage after update
-if(isset($_POST['update']))
-{
-	$id = $_POST['product-id'];
-
-	$name=$_POST['name'];
-	$price=$_POST['price'];
-    $description=$_POST['description'];
-    $image1=$_POST['image1'];
-
-	// update user data
-	$result = mysqli_query($mysqli, "UPDATE add_product SET name='$name',price='$price',description='$description',description='$description' WHERE product-id=$id");
-
-    if($result){
-        header('location:overview.php');
-      }
-         else
-         {
-          echo "data not delete successfully";
-        }
-      
-}
-?>
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -90,17 +44,14 @@ if(isset($_POST['update']))
   <link rel="stylesheet" href="../../plugins/simplemde/simplemde.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
-
-
-
     <!-- Main content -->
-    <form  name="update_user" method="post" action="update.php" >
+    <form  name="" method="GET" action="" >
     <section class="content">
-      <div class="row" style="margin-right: -422.5px; margin-left: 292.5px;">
+      <div class="row" style="margin-right: -422.5px; margin-left: 292.5px;  margin-top: 50px;);">
         <div class="col-md-6">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Add Product Details</h3>
+              <h3 class="card-title">Update Product Details</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -111,38 +62,35 @@ if(isset($_POST['update']))
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Product Name</label>
-                <input type="text" id="inputName" name="name" value="<?php echo $name; ?>" class="form-control">
-              </div>
-              
-              
+                <input type="text" id="inputName" name="name" value="<?php echo $pname; ?>" class="form-control">
+                <input type="hidden" id="inputName" name="hid" value="<?php echo $id; ?>" class="form-control">
+              </div> 
               <div class="form-group">
                 <label for="inputClientCompany">Product Price</label>
-                <input type="text" name="price" id="inputClientCompany" value="<?php echo $price; ?>" class="form-control">
+                <input type="text" name="price" id="inputClientCompany" value="<?php echo $pprice; ?>" class="form-control">
               </div>
-
               <div class="form-group">
                 <label for="inputClientCompany">Prodect Description</label>
-                <textarea id="summernote" name="description" value="<?php echo $description; ?>">
-                <?php echo $description; ?>
+                <textarea id="summernote" name="description" value="">
+                <?php echo $pdescription; ?>
               </textarea>
               </div>
 
               <div class="form-group">
       <label><strong>Upload Images</strong></label>
-      <?php echo $image1;?>
+      <?php echo $pimage1;?>
       <div class="custom-file">
           
-        <input type="file" name="imag1"  value="<?php echo $image1;?>" id="customFile">
-        
-        <label class="custom-file-label" for="customFile">Choose file</label>
+        <input type="file" name="imag1"  value="<?php echo $pimage1;?>" id="customFile">
+        <label class="custom-file-label" value="<?php echo $pimage1;?>" for="customFile" >Choose file</label>
       </div>
     </div>     
                   
             <div class="row">
               <div class="col-12">
                    <a href="add_product.php"  class="btn btn-secondary">Cancel </a>
-                 
-                   <input type="submit" name="update" value="Update"> 
+                 <!-- <button type=submit name="addUpdate" value="<?php echo $producrd_id;?>">Add</button> -->
+                   <input type="submit" name="submit"  value="Update" class="btn btn-success"> 
               </div>
            </div>
            </form>
@@ -213,3 +161,34 @@ $(document).ready(function() {
   });
 });
 </script>
+
+
+
+<?php
+if (isset($_GET['submit'])) {
+
+    $product_id=$_GET['hid'];
+	$name=$_GET['name'];
+	$price=$_GET['price'];
+    $description=$_GET['description'];
+    $image1=$_GET['imag1'];
+
+           
+    
+    
+	// update user data
+
+	 $result = mysqli_query($db, "UPDATE add_product SET name='$name',price='$price',description='$description',image1='$image1'  WHERE product_id=$product_id");
+
+   
+    if($result){
+        echo "data  update successfully";
+      }
+    else
+       {
+        echo "data not update successfully";
+       }
+      
+}
+?>
+

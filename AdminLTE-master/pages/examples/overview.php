@@ -1,4 +1,5 @@
 <?php include('server.php') ?>
+
 <?php
 // iializing variables
 $username = "";
@@ -788,19 +789,21 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
                   <th>Action</th>
                 </tr>
               </thead>
-              <?php while ($row = mysqli_fetch_array($results)) { ?>
+
+              <?php $i=1; while ($row = mysqli_fetch_array($results)) { ?>
               <tbody>
                 <tr class="datarow">
-                  <td><?php echo $row['product-id']; ?></td>
+                  <td><?php echo $i++; ?></td>
                   <td><?php echo $row['name']; ?></td>
                   <td><?php echo $row['price']; ?></td>
                   <td><?php echo $row['description']; ?></td>
-                  <td>  <?php $image= $row['image1']; ?> 
+                  <td>  <?php $image= $row['image1']; ?>
                         <img src="image/<?php echo $image ;?>" width="90" height="40"></td>
                   <td>
-
-                  <a href="update.php?edit=<?php echo $row['product-id']; ?>" class="btn btn-success" >Update</a>
-                  <a href="server.php?product_id=<?php echo $row['product-id']; ?>" class="btn btn-danger">Delete</a>
+                         
+                  <a href="update.php?edit=<?php echo $row['product_id'];?>" class="btn btn-success" >Update</a>
+                  
+                  <a href="delete.php?product_id=<?php echo $row['product_id']; ?>" onclick='return checkdelete()' class="btn btn-danger">Delete</a>
                          
                         
                 </tr> 
@@ -848,5 +851,10 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
 <!-- <td>  <?php $image= $row['image1']; ?> 
                  <img src="image/<?php echo $image ;?>" width="90" height="40"></td> -->
 
-
+<script>
+function checkdelete()
+{
+  return confirm('Are you sure want to delete this data??',)
+}
+</script>
 

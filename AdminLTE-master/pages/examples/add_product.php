@@ -764,18 +764,18 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Product Name</label>
-                <input type="text" id="inputName" name="name" class="form-control">
+                <input type="text" id="inputName" name="name" class="form-control" required>
               </div>
         
               
               <div class="form-group">
                 <label for="inputClientCompany">Product Price</label>
-                <input type="text" name="price" id="inputClientCompany" class="form-control">
+                <input type="text" name="price" id="inputClientCompany" class="form-control" required>
               </div>
 
               <div class="form-group">
                 <label for="inputClientCompany">Prodect Description</label>
-                <textarea id="summernote" name="description">
+                <textarea id="summernote" name="description" >
                
               </textarea>
               </div>
@@ -791,7 +791,7 @@
             <div class="row">
               <div class="col-12">
                    <a href="add_product.php" class="btn btn-secondary" >Cancel </a>
-                   <button type="submit" class="btn btn-primary" name="addProduct">submit</button>
+                   <button type="submit" class="btn btn-primary"  name="addProduct">submit</button>
               </div>
            </div>
            </form>
@@ -840,6 +840,7 @@
     });
   })
 </script>
+<script>
 </body>
 </html>
 <script>
@@ -861,4 +862,3 @@ $(document).ready(function() {
       .html(filenames.join(","));
   });
 });
-</script>
