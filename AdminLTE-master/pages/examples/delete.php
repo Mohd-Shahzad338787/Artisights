@@ -1,10 +1,5 @@
 <?php 
-session_start();
-// initializing variables
-$username = "";
-$email    = "";
-// connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'artisights');
+include "config.php";
 
     $product_id = $_GET['product_id'];
      echo $product_id ;

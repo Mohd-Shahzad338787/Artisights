@@ -783,14 +783,14 @@
               <div class="form-group">
       <label><strong>Upload Images</strong></label>
       <div class="custom-file">
-        <input type="file" name="imag1" multiple class="custom-file-input form-control" id="customFile">
+        <input type="file" name="imag1[]" multiple class="custom-file-input form-control" id="customFile">
         <label class="custom-file-label" for="customFile">Choose file</label>
       </div>
     </div>
                   
             <div class="row">
               <div class="col-12">
-                   <a href="add_product.php" class="btn btn-secondary" >Cancel </a>
+                   <a href="overview.php" class="btn btn-secondary" >Cancel </a>
                    <button type="submit" class="btn btn-primary"  name="addProduct">submit</button>
               </div>
            </div>
