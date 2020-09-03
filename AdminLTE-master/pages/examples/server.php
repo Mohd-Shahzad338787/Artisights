@@ -1,55 +1,11 @@
 <?php
-include "config.php";
-// add product
-if (isset($_POST['addProduct'])) {
-  $name = mysqli_real_escape_string($db, $_POST['name']);
-  $price = mysqli_real_escape_string($db, $_POST['price']);
-  $description = mysqli_real_escape_string($db, $_POST['description']);
-  //  if (empty($name)) { array_push($errors, "name is required"); }
-  //  if (empty($price)) { array_push($errors, "price is required"); }
-  //  if (empty($description)) { array_push($errors, "description is required"); }
+// initializing variables
+$username = "";
+$email    = "";
+$errors = array(); 
 
-  $filename = $_FILES["imag1"]['name']; 
-  $tempname = $_FILES["imag1"]['tmp_name'];   
-      $folder = "image/".$filename; 
-
-      
-      // Get all the submitted data from the form 
-      $sql = "INSERT INTO add_product (name,price,description,image1) VALUES ('$name','$price','$description','$filename')"; 
-      
-      // Execute query 
-      mysqli_query($db, $sql); 
-        
-      // Now let's move the uploaded image into the folder: image 
-      if (move_uploaded_file($tempname, $folder))  { 
-        echo  "<script>alert('Data insert in the Database')</script>"; 
-      }
-      else
-      {  
-          $msg = "Failed to upload image"; 
-    } 
-    header('location:overview.php');
-  }
-  
-  // $uploadFolder = 'image/';
-  // foreach ($_FILES['imag1']['tmp_name'] as $key => $image) {
-  //     $imageTmpName = $_FILES['imag1']['tmp_name'][$key];
-  //     $imageName = $_FILES['imag1']['name'][$key];
-  //     $result = move_uploaded_file($imageTmpName,$uploadFolder.$imageName);
-
-  //     // save to database
-  //     $query = "INSERT INTO add_product (name,price,description,image1) VALUES ('$name','$price','$description','$imageName')";
-  //     $run = $db->query($query) or die("Error in saving image".$connection->error);
-  // }
-  // if ($result) {
-  //     echo '<script>alert("Images uploaded successfully !")</script>';
-  //     echo '<script>window.location.href="index.php";</script>';
-  // }
-
-
-
-  
-
+// connect to the database
+$db = mysqli_connect('localhost', 'root', '', 'artisights');
 
 
 // REGISTER USER
@@ -99,7 +55,6 @@ if (isset($_POST['reg_user'])) {
   }
 }
 
-
 // LOGIN USER
 if (isset($_POST['login_user'])) {
     $username = mysqli_real_escape_string($db, $_POST['username']);
@@ -126,26 +81,18 @@ if (isset($_POST['login_user'])) {
     }
   }
 
-// Add user details
-  if (isset($_POST['addUser'])) {
-    $fname = mysqli_real_escape_string($db, $_POST['fname']);
-    $lname = mysqli_real_escape_string($db, $_POST['lname']);
-    $email = mysqli_real_escape_string($db, $_POST['email']);
-    $contact = mysqli_real_escape_string($db, $_POST['contact']);
-    
-   
-    
+// add Product Details
+  if (isset($_POST['addProduct'])) {
+    $name = mysqli_real_escape_string($db, $_POST['name']);
+    $price = mysqli_real_escape_string($db, $_POST['price']);
+    $description = mysqli_real_escape_string($db, $_POST['description']);
   
-    $filename = $_FILES["image"]['name']; 
-    $tempname = $_FILES["image"]['tmp_name'];   
-        $folder = "userimage/".$filename; 
-        echo $fname;
-        echo $lname;
-        echo $email;
-        echo $filename;
+    $filename = $_FILES["imag1"]['name']; 
+    $tempname = $_FILES["imag1"]['tmp_name'];   
+        $folder = "image/".$filename; 
         // Get all the submitted data from the form 
-        $sql = "INSERT INTO user (fname,lname,email,contact,image) VALUES ('$fname','$lname','$email','$contact','$filename')"; 
-      
+        $sql = "INSERT INTO add_product (name,price,description,image1) VALUES ('$name','$price','$description','$filename')"; 
+        
         // Execute query 
         mysqli_query($db, $sql); 
           
@@ -155,12 +102,58 @@ if (isset($_POST['login_user'])) {
         }
         else
         {  
-            $msg = "Failed to upload image"; 
+            $msg = "Failed to upload image";
       } 
-     
+ 
     }
-    
 
-  
+    //add USer Details
+
+    if (isset($_POST['addUser'])) {
+      $fname = mysqli_real_escape_string($db, $_POST['fname']);
+      $lname = mysqli_real_escape_string($db, $_POST['lname']);
+      $email = mysqli_real_escape_string($db, $_POST['email']);
+      $contact = mysqli_real_escape_string($db, $_POST['contact']); 
+
+      $filename = $_FILES["image"]['name']; 
+      $tempname = $_FILES["image"]['tmp_name'];   
+          $folder = "userimage/".$filename; 
+ 
+          // Get all the submitted data from the form 
+          $sql = "INSERT INTO user (fname,lname,email,contact,image) VALUES ('$fname','$lname','$email','$contact','$filename')"; 
+          // Execute query 
+          mysqli_query($db, $sql);   
+          // Now let's move the uploaded image into the folder: image 
+          if (move_uploaded_file($tempname, $folder))  { 
+            echo  "<script>alert('Data insert in the Database')</script>"; 
+          }
+          else
+          {  
+              $msg = "Failed to upload image";
+        } 
+   
+      }
+    
   
   ?>
+
+  
+    
+     
+     <!-- mutiple image1
+     // $uploadFolder = 'image/';
+    // foreach ($_FILES['imag1']['tmp_name'] as $key => $image) {
+    //     $imageTmpName = $_FILES['imag1']['tmp_name'][$key];
+    //     $imageName = $_FILES['imag1']['name'][$key];
+    //     $result = move_uploaded_file($imageTmpName,$uploadFolder.$imageName);
+  
+    //     // save to database
+    //     $query = "INSERT INTO add_product (name,price,description,image1) VALUES ('$name','$price','$description','$imageName')";
+    //     $run = $db->query($query) or die("Error in saving image".$connection->error);
+    // }
+    // if ($result) {
+    //     echo '<script>alert("Images uploaded successfully !")</script>';
+    //     echo '<script>window.location.href="index.php";</script>';
+    // }
+   -->
+  

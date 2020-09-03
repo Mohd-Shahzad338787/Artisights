@@ -1,10 +1,20 @@
-<?php include('server.php') ?>
+<?php 
+include "config.php";
+
+	if (isset($_GET['user_id'])) {
+		$id = $_GET['user_id'];
+        $results = mysqli_query($db, "SELECT * FROM user WHERE user_id =$id");
+        $row = mysqli_fetch_array($results)
+
+?> 
+
+<?php } ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Editors</title>
+  <title>view_user</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -12,13 +22,6 @@
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.min.css">
-  <!-- CodeMirror -->
-  <link rel="stylesheet" href="../../plugins/codemirror/codemirror.css">
-  <link rel="stylesheet" href="../../plugins/codemirror/theme/monokai.css">
-  <!-- SimpleMDE -->
-  <link rel="stylesheet" href="../../plugins/simplemde/simplemde.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -373,8 +376,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Forms
@@ -395,7 +398,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../forms/editors.html" class="nav-link active">
+                <a href="../forms/editors.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Editors</p>
                 </a>
@@ -543,8 +546,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
@@ -595,7 +598,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../examples/404.html" class="nav-link">
+                <a href="../examples/404.html" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Error 404</p>
                 </a>
@@ -725,84 +728,76 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <!-- <h1 class="m-0 text-dark">Add Product Details</h1> -->
-          </div><!-- /.col -->
+            <h1> User Details</h1>
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">add Product</li>
+            <!-- <button type="button" class="btn btn-block btn-default">Go to Back</button> -->
+            <a href="user_overview.php"  class="btn btn-block btn-default">Go to Back </a>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+          </div>
+        </div>
       </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <form name="" action="add_product.php" method="post" enctype="multipart/form-data">
-    <section class="content">
-      <div class="row" style="margin-right: -698.5px; margin-left: 199.5px;">
-        <div class="col-md-6">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Add Product Details</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputName">Product Name</label>
-                <input type="text" id="inputName" name="name" class="form-control" required>
-              </div>
+      <style>
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="bs-example">
+    <table class="table table-bordered">
         
-              
-              <div class="form-group">
-                <label for="inputClientCompany">Product Price</label>
-                <input type="text" name="price" id="inputClientCompany" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="inputClientCompany">Prodect Description</label>
-                <textarea id="summernote" name="description" >
+        <tbody>
+            <tr>
+                <td>User ID   </td>
+               <td><?php echo $row['user_id']; ?></td>
+                
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td><?php echo $row['fname']; ?></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><?php echo $row['lname']; ?></td>
                
-              </textarea>
-              </div>
-
-              <div class="form-group">
-      <label><strong>Upload Images</strong></label>
-      <div class="custom-file">
-        <input type="file" name="imag1" class="custom-file-input form-control" id="customFile">
-        <label class="custom-file-label" for="customFile">Choose file</label>
-      </div>
-    </div>
-                  
-            <div class="row">
-              <div class="col-12">
-                   <a href="overview.php" class="btn btn-secondary" >Cancel </a>
-                   <button type="submit" class="btn btn-primary"  name="addProduct">submit</button>
-              </div>
-           </div>
-           </form>
-    </section>
+            </tr> 
+            <tr>
+                <td>Email</td>
+                <td><?php echo $row['email']; ?></td>
+               
+            </tr>   
+            <tr>
+                <td>Contact</td>
+                <td><?php echo $row['contact']; ?></td>
+               
+               
+            </tr>   
+            <tr>
+                <td>Image</td>
+                <td> <?php $image= $row['image']; ?>   <?php  echo "<br>"; ?>
+               <img src="userimage/<?php echo $image ;?>" width="300" height="300"></td>
+               
+            </tr>                      
+        </tbody>
+    </table>
+</div>
+    <!-- /.content -->
+  </div>
   <!-- /.content-wrapper -->
-  <!-- <footer class="main-footer">
+  <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.1.0-pre
     </div>
     <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer> -->
+  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -818,47 +813,7 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- Summernote -->
-<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-<!-- CodeMirror -->
-<script src="../../plugins/codemirror/codemirror.js"></script>
-<script src="../../plugins/codemirror/mode/css/css.js"></script>
-<script src="../../plugins/codemirror/mode/xml/xml.js"></script>
-<script src="../../plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-    // Summernote
-    $('#summernote').summernote()
-
-    // CodeMirror
-    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-      mode: "htmlmixed",
-      theme: "monokai"
-    });
-  })
-</script>
-<script>
-$(document).ready(function() {
-  $('input[type="file"]').on("change", function() {
-    let filenames = [];
-    let files = document.getElementById("customFile").files;
-    if (files.length > 1) {
-      filenames.push("Total Files (" + files.length + ")");
-    } else {
-      for (let i in files) {
-        if (files.hasOwnProperty(i)) {
-          filenames.push(files[i].name);
-        }
-      }
-    }
-    $(this)
-      .next(".custom-file-label")
-      .html(filenames.join(","));
-  });
-});
-</script>
 </body>
 </html>

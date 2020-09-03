@@ -1,10 +1,27 @@
-<?php include('server.php') ?>
+<?php 
+include "config.php";
+
+	if (isset($_GET['edit'])) {
+		$id = $_GET['edit'];
+
+		$record = mysqli_query($db, "SELECT * FROM user WHERE user_id =$id");
+            $n = mysqli_fetch_array($record);
+            $fname = $n['fname'];
+            $lname = $n['lname'];
+            $email = $n['email'];
+            $contact = $n['contact'];
+            $image = $n['image'];
+
+		}   
+?> 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Editors</title>
+  <title>Data Update</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,6 +37,8 @@
   <!-- SimpleMDE -->
   <link rel="stylesheet" href="../../plugins/simplemde/simplemde.min.css">
 </head>
+
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -373,8 +392,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Forms
@@ -395,7 +414,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../forms/editors.html" class="nav-link active">
+                <a href="../forms/editors.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Editors</p>
                 </a>
@@ -543,8 +562,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
@@ -595,7 +614,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../examples/404.html" class="nav-link">
+                <a href="../examples/404.html" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Error 404</p>
                 </a>
@@ -724,36 +743,15 @@
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <!-- <h1 class="m-0 text-dark">Add Product Details</h1> -->
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">add Product</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
+<body class="hold-transition sidebar-mini">
     <!-- Main content -->
-    <form name="" action="add_product.php" method="post" enctype="multipart/form-data">
+    <form  name="" method="GET" action="" >
     <section class="content">
-      <div class="row" style="margin-right: -698.5px; margin-left: 199.5px;">
+      <div class="row" style="margin-right: -422.5px; margin-left: 450.5px;  margin-top: 50px;);">
         <div class="col-md-6">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Add Product Details</h3>
+              <h3 class="card-title">Update User Details</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -763,46 +761,49 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="inputName">Product Name</label>
-                <input type="text" id="inputName" name="name" class="form-control" required>
-              </div>
-        
-              
+                <label for="inputName">First Name</label>
+                <input type="text" id="inputName" name="fname" value="<?php echo $fname; ?>" class="form-control">
+                <input type="hidden" id="inputName" name="hid" value="<?php echo $id; ?>" class="form-control">
+              </div> 
+             
               <div class="form-group">
-                <label for="inputClientCompany">Product Price</label>
-                <input type="text" name="price" id="inputClientCompany" class="form-control" required>
+                <label for="inputName">Last Name</label>
+                <input type="text" id="inputName" name="lname" value="<?php echo $lname; ?>" class="form-control">
+              </div> 
+              <div class="form-group">
+                <label for="inputClientCompany">Email</label>
+                <input type="email" name="email" id="inputClientCompany" value="<?php echo $email; ?>" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Contact</label>
+                <input type="text" name="contact" id="inputClientCompany" value="<?php echo $contact; ?>" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="inputClientCompany">Prodect Description</label>
-                <textarea id="summernote" name="description" >
-               
-              </textarea>
-              </div>
-
-              <div class="form-group">
-      <label><strong>Upload Images</strong></label>
+      <label><strong>Profile Images</strong></label>
+      
       <div class="custom-file">
-        <input type="file" name="imag1" class="custom-file-input form-control" id="customFile">
-        <label class="custom-file-label" for="customFile">Choose file</label>
+          
+        <input type="file" name="image"  value="<?php echo $image;?>" id="customFile">
+        <label class="custom-file-label"  value="<?php echo $image;?>" for="customFile" ><?php echo $image;?></label>
       </div>
-    </div>
+    </div>     
                   
             <div class="row">
               <div class="col-12">
-                   <a href="overview.php" class="btn btn-secondary" >Cancel </a>
-                   <button type="submit" class="btn btn-primary"  name="addProduct">submit</button>
+                   <a href="user_overview.php"  class="btn btn-secondary">Cancel </a>
+                   <input type="submit" name="submit"  value="Submit" class="btn btn-success"> 
               </div>
            </div>
            </form>
     </section>
-  <!-- /.content-wrapper -->
-  <!-- <footer class="main-footer">
+ 
+  <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.1.0-pre
     </div>
     <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer> -->
+  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -829,18 +830,6 @@
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-  $(function () {
-    // Summernote
-    $('#summernote').summernote()
-
-    // CodeMirror
-    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-      mode: "htmlmixed",
-      theme: "monokai"
-    });
-  })
-</script>
-<script>
 $(document).ready(function() {
   $('input[type="file"]').on("change", function() {
     let filenames = [];
@@ -862,3 +851,37 @@ $(document).ready(function() {
 </script>
 </body>
 </html>
+
+
+
+
+<?php
+if (isset($_GET['submit'])) {
+
+    $user_id=$_GET['hid'];
+    $fname=$_GET['fname'];
+    $lname=$_GET['lname'];
+	$email=$_GET['email'];
+    $contact=$_GET['contact'];
+    $image=$_GET['image'];
+
+
+    
+	// update user data
+
+	 $result = mysqli_query($db, "UPDATE user SET fname='$fname',lname='$lname',email='$email',contact='$contact',image='$image'  WHERE user_id=$user_id");
+
+   
+    if($result){
+        // echo "data  update successfully";
+        echo  "<script>alert('Data Updated in the Database')</script>"; 
+        
+      }
+    else
+       {
+        echo "data not update successfully";
+       }
+      
+}
+?>
+

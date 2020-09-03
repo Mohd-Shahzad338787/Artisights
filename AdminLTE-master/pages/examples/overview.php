@@ -762,7 +762,7 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Responsive Table</h3>
+            <h3 class="card-title">Product Table</h3>
             <div class="card-tools">
             <a class="btn btn-primary" href="add_product.php" role="button">Add New Product</a>
             
@@ -777,7 +777,7 @@ $results = mysqli_query($db, "SELECT * FROM add_product");
             <table  class="table table-bordered table-hover" style="text-align: center;" >
               <thead>
                 <tr class="tableheader">
-                  <th>ID</th>
+                  <th>SNo.</th>
                   <th>Name</th>
                   <th>Price</th>
                   <th>Description</th>  
