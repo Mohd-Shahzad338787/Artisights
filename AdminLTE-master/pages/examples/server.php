@@ -95,7 +95,26 @@ if (isset($_POST['login_user'])) {
         
         // Execute query 
         mysqli_query($db, $sql); 
-          
+        $last_id = mysqli_insert_id($db);
+         
+        
+         $uploadFolder = 'image/';
+       foreach ($_FILES['image']['tmp_name'] as $key => $image) {
+           $imageTmpName = $_FILES['image']['tmp_name'][$key];
+           $imageName = $_FILES['image']['name'][$key];
+           $result = move_uploaded_file($imageTmpName,$uploadFolder.$imageName);
+     
+           // save to database
+           $query = "INSERT INTO productimage (productImageId,image) VALUES ('$last_id','$imageName')";
+            $run = $db->query($query);
+        }
+       if ($result) {
+       //     echo '<script>alert("Images uploaded successfully !")</script>';
+       //     echo '<script>window.location.href="index.php";</script>';
+       }
+    
+     
+
         // Now let's move the uploaded image into the folder: image 
         if (move_uploaded_file($tempname, $folder))  { 
           echo  "<script>alert('Data insert in the Database')</script>"; 

@@ -216,15 +216,15 @@ include "config.php";
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
+                <a href="overview.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Product Manager</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
+                <a href="user_overview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>User Manager</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -792,18 +792,13 @@ include "config.php";
             <div class="row">
               <div class="col-12">
                    <a href="user_overview.php"  class="btn btn-secondary">Cancel </a>
-                   <input type="submit" name="submit"  value="Submit" class="btn btn-success"> 
-              </div>
+                   <input type="submit"  onclick="pageRedirect()" name="submit"  value="Submit" class="btn btn-success"> 
+                  
            </div>
            </form>
     </section>
- 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-pre
-    </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+ </div>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -812,6 +807,7 @@ include "config.php";
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -848,12 +844,16 @@ $(document).ready(function() {
       .html(filenames.join(","));
   });
 });
+
 </script>
+<script>
+    function pageRedirect() {
+      // setTimeout(alert("complete"); 3000);
+      window.location.href = "http://localhost/AdminLTE-master/AdminLTE-master/pages/examples/user_overview.php";
+    }      
+</script> 
 </body>
 </html>
-
-
-
 
 <?php
 if (isset($_GET['submit'])) {
@@ -865,23 +865,21 @@ if (isset($_GET['submit'])) {
     $contact=$_GET['contact'];
     $image=$_GET['image'];
 
-
-    
 	// update user data
 
-	 $result = mysqli_query($db, "UPDATE user SET fname='$fname',lname='$lname',email='$email',contact='$contact',image='$image'  WHERE user_id=$user_id");
+  $result = mysqli_query($db, "UPDATE user SET fname='$fname',lname='$lname',email='$email',contact='$contact' WHERE user_id=$user_id");
 
-   
-    if($result){
-        // echo "data  update successfully";
-        echo  "<script>alert('Data Updated in the Database')</script>"; 
-        
+  if(!empty($image)){
+   $result = mysqli_query($db, "UPDATE user SET image='$image' WHERE user_id=$user_id");
+  }
+   if($result){
+       echo "data  update successfully";
+      //  echo  "<script>alert('Data Updated in the Database')</script>"; 
+   }
+   else
+      {
+       echo "data not update successfully";
       }
-    else
-       {
-        echo "data not update successfully";
-       }
-      
+     
 }
 ?>
-

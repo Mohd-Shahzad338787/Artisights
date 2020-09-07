@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="../../plugins/codemirror/theme/monokai.css">
   <!-- SimpleMDE -->
   <link rel="stylesheet" href="../../plugins/simplemde/simplemde.min.css">
+  
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -197,15 +200,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
+                <a href="overview.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Product Manager</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
+                <a href="user_overview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>User Manager</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -781,12 +784,29 @@
               </div>
 
               <div class="form-group">
+              
       <label><strong>Upload Images</strong></label>
+      
       <div class="custom-file">
-        <input type="file" name="imag1" class="custom-file-input form-control" id="customFile">
+       
+        
+       <input type="file" name="imag1" class="custom-file-input form-control" id="customFile">
         <label class="custom-file-label" for="customFile">Choose file</label>
+        
+
       </div>
     </div>
+    
+    <div class="table-responsive">  
+                               <table class="" id="dynamic_field">  
+                                    <tr>  
+                                         <td><input type="file" name="image[]"  class="form-control name_list" /></td>  
+                                         <td><button type="button" name="add" id="add" class="btn btn-secondary">Add More Image</button></td>  
+                                    </tr>  
+                               </table>  
+                                
+                          </div><br>
+                         
                   
             <div class="row">
               <div class="col-12">
@@ -860,5 +880,18 @@ $(document).ready(function() {
   });
 });
 </script>
+<script>  
+ $(document).ready(function(){  
+      var i=1;  
+      $('#add').click(function(){  
+           i++;  
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="file" name="image[]" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+      });  
+      $(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#row'+button_id+'').remove();  
+      });    
+ });  
+ </script>
 </body>
 </html>

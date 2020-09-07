@@ -35,6 +35,8 @@ include "config.php";
   <link rel="stylesheet" href="../../plugins/codemirror/theme/monokai.css">
   <!-- SimpleMDE -->
   <link rel="stylesheet" href="../../plugins/simplemde/simplemde.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 
 
@@ -215,15 +217,15 @@ include "config.php";
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
+                <a href="overview.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Product Manager</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
+                <a href="user_overview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>User Manager</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -789,7 +791,7 @@ include "config.php";
               <div class="col-12">
                    <a href="overview.php"  class="btn btn-secondary">Cancel </a>
                  <!-- <button type=submit name="addUpdate" value="<?php echo $producrd_id;?>">Add</button> -->
-                   <input type="submit" name="submit"  value="Update" class="btn btn-success"> 
+                   <input type="submit" name="submit"  value="Update"  onclick="pageRedirect()" class="btn btn-success"> 
               </div>
            </div>
            </form>
@@ -838,6 +840,11 @@ include "config.php";
     });
   })
 </script>
+<script>
+    function pageRedirect() {
+      window.location.href = "http://localhost/AdminLTE-master/AdminLTE-master/pages/examples/overview.php";
+    }      
+</script> 
 </body>
 </html>
 <script>
@@ -872,14 +879,16 @@ if (isset($_GET['submit'])) {
     $description=$_GET['description'];
     $img1=$_GET['imag1'];
 
-           
+   
     
     
 	// update user data
 
-	 $result = mysqli_query($db, "UPDATE add_product SET name='$name',price='$price',description='$description',image1='$img1'  WHERE product_id=$product_id");
+	 $result = mysqli_query($db, "UPDATE add_product SET name='$name',price='$price',description='$description' WHERE product_id=$product_id");
 
-   
+   if(!empty($img1)){
+    $result = mysqli_query($db, "UPDATE add_product SET image1='$img1' WHERE product_id=$product_id");
+   }
     if($result){
         // echo "data  update successfully";
         echo  "<script>alert('Data Updated in the Database')</script>"; 
